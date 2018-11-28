@@ -1,0 +1,36 @@
+podTemplate(label: 'applicationdesigner', cloud: 'kubernetes', containers: [
+    containerTemplate(
+      name: 'golang', image: 'golang:1.10.4-alpine', ttyEnabled: true, workingDir: '/home/jenkins'
+    ),
+    containerTemplate(
+      name: 'aws-cli', image: 'mesosphere/aws-cli', ttyEnabled: true, workingDir: '/home/jenkins',      
+      envVars: [
+        envVar(key: 'AWS_DEFAULT_REGION', value: 'us-west-2'),
+        secretEnvVar(key: 'AWS_ACCESS_KEY_ID', secretName: 'aws-secret', secretKey: 'aws_access_key_id'),
+        secretEnvVar(key: 'AWS_SECRET_ACCESS_KEY', secretName: 'aws-secret', secretKey: 'aws_secret_access_key'),
+      ]
+    ),
+    containerTemplate(
+      name: 'docker', image: 'docker:18.09-dind', command: 'cat', ttyEnabled: true, workingDir: '/home/jenkins'
+    ),
+    containerTemplate( 
+      name: 'docker-compose', image: 'docker/compose:1.23.1', command: 'cat', ttyEnabled: true, workingDir: '/home/jenkins'
+    ),
+    containerTemplate(
+      name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.10.10', command: 'cat', ttyEnabled: true, workingDir: '/home/jenkins'
+    ),
+    containerTemplate(
+      name: 'gcloud', image: 'google/cloud-sdk:226.0.0-alpine', command: 'cat', ttyEnabled: true, workingDir: '/home/jenkins'
+    ),
+    containerTemplate(
+      name: 'git', image: 'alpine/git', command: 'cat', ttyEnabled: true, workingDir: '/home/jenkins'
+    ),
+    containerTemplate(
+      name: 'yarn', image: 'kkarczmarczyk/node-yarn:8.0-slim', command: 'cat', ttyEnabled: true, workingDir: '/home/jenkins'
+    )
+]) 
+
+{
+   ...
+}
+

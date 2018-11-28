@@ -1,0 +1,9 @@
+podTemplate(label: 'applicationdesigner', cloud: 'kubernetes', containers: [
+    containerTemplate(
+      name: 'build-tools', image: 'build-tools', ttyEnabled: true, workingDir: '/home/jenkins'
+    )
+) 
+{
+   ...
+}
+
